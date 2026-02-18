@@ -64,7 +64,7 @@ public final class Basic: CustomStringConvertible, Equatable {
             return "<null>"
         }
         defer { se_string_free(raw) }
-        guard let text = String(validatingUTF8: raw) else {
+        guard let text = String(validatingCString: raw) else {
             return "<invalid-utf8>"
         }
         return text
