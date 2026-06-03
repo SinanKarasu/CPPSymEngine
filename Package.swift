@@ -42,6 +42,8 @@ let package = Package(
                 .headerSearchPath("utilities/fast_float/include"),
                 .headerSearchPath("utilities/cereal/include"),
                 .define("symengine_EXPORTS"),
+                .define("SYMENGINE_FORCE_NO_THREADS", .when(platforms: [.visionOS])),
+                .define("_LIBCPP_HAS_NO_THREADS", .when(platforms: [.visionOS])),
                 .unsafeFlags(["-I/opt/homebrew/include"])
             ]
         ),
@@ -57,7 +59,9 @@ let package = Package(
         ),
         .target(
             name: "CPPSymEngine",
-            dependencies: ["CSymEngineBridge"]
+            dependencies: [
+                .target(name: "CSymEngineBridge", condition: .when(platforms: [.macOS])),
+            ]
         ),
         .testTarget(
             name: "CPPSymEngineTests",

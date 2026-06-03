@@ -10,6 +10,16 @@ static inline basic_struct *to_basic(se_basic_t value)
     return (basic_struct *)value;
 }
 
+static inline CMapBasicBasic *to_basic_map(se_basic_map_t value)
+{
+    return (CMapBasicBasic *)value;
+}
+
+static inline CSetBasic *to_basic_set(se_basic_set_t value)
+{
+    return (CSetBasic *)value;
+}
+
 se_basic_t se_basic_new(void)
 {
     return (se_basic_t)basic_new_heap();
@@ -99,6 +109,91 @@ int32_t se_basic_pow(se_basic_t result, se_basic_t lhs, se_basic_t rhs)
     return (int32_t)basic_pow(to_basic(result), to_basic(lhs), to_basic(rhs));
 }
 
+int32_t se_basic_diff(se_basic_t result, se_basic_t expr, se_basic_t symbol)
+{
+    return (int32_t)basic_diff(to_basic(result), to_basic(expr), to_basic(symbol));
+}
+
+int32_t se_basic_expand(se_basic_t result, se_basic_t value)
+{
+    return (int32_t)basic_expand(to_basic(result), to_basic(value));
+}
+
+int32_t se_basic_neg(se_basic_t result, se_basic_t value)
+{
+    return (int32_t)basic_neg(to_basic(result), to_basic(value));
+}
+
+int32_t se_basic_abs(se_basic_t result, se_basic_t value)
+{
+    return (int32_t)basic_abs(to_basic(result), to_basic(value));
+}
+
+int32_t se_basic_sin(se_basic_t result, se_basic_t value)
+{
+    return (int32_t)basic_sin(to_basic(result), to_basic(value));
+}
+
+int32_t se_basic_cos(se_basic_t result, se_basic_t value)
+{
+    return (int32_t)basic_cos(to_basic(result), to_basic(value));
+}
+
+int32_t se_basic_tan(se_basic_t result, se_basic_t value)
+{
+    return (int32_t)basic_tan(to_basic(result), to_basic(value));
+}
+
+int32_t se_basic_asin(se_basic_t result, se_basic_t value)
+{
+    return (int32_t)basic_asin(to_basic(result), to_basic(value));
+}
+
+int32_t se_basic_acos(se_basic_t result, se_basic_t value)
+{
+    return (int32_t)basic_acos(to_basic(result), to_basic(value));
+}
+
+int32_t se_basic_atan(se_basic_t result, se_basic_t value)
+{
+    return (int32_t)basic_atan(to_basic(result), to_basic(value));
+}
+
+int32_t se_basic_sinh(se_basic_t result, se_basic_t value)
+{
+    return (int32_t)basic_sinh(to_basic(result), to_basic(value));
+}
+
+int32_t se_basic_cosh(se_basic_t result, se_basic_t value)
+{
+    return (int32_t)basic_cosh(to_basic(result), to_basic(value));
+}
+
+int32_t se_basic_tanh(se_basic_t result, se_basic_t value)
+{
+    return (int32_t)basic_tanh(to_basic(result), to_basic(value));
+}
+
+int32_t se_basic_exp(se_basic_t result, se_basic_t value)
+{
+    return (int32_t)basic_exp(to_basic(result), to_basic(value));
+}
+
+int32_t se_basic_log(se_basic_t result, se_basic_t value)
+{
+    return (int32_t)basic_log(to_basic(result), to_basic(value));
+}
+
+int32_t se_basic_sqrt(se_basic_t result, se_basic_t value)
+{
+    return (int32_t)basic_sqrt(to_basic(result), to_basic(value));
+}
+
+int32_t se_basic_evalf(se_basic_t result, se_basic_t value, unsigned long bits, int32_t real)
+{
+    return (int32_t)basic_evalf(to_basic(result), to_basic(value), bits, real);
+}
+
 void se_basic_const_pi(se_basic_t result)
 {
     basic_const_pi(to_basic(result));
@@ -112,4 +207,88 @@ void se_basic_const_e(se_basic_t result)
 int32_t se_basic_eq(se_basic_t lhs, se_basic_t rhs)
 {
     return (int32_t)basic_eq(to_basic(lhs), to_basic(rhs));
+}
+
+int32_t se_basic_is_integer(se_basic_t value)
+{
+    return (int32_t)is_a_Integer(to_basic(value));
+}
+
+int32_t se_basic_is_real_double(se_basic_t value)
+{
+    return (int32_t)is_a_RealDouble(to_basic(value));
+}
+
+long se_integer_get_si(se_basic_t value)
+{
+    return integer_get_si(to_basic(value));
+}
+
+double se_real_double_get_d(se_basic_t value)
+{
+    return real_double_get_d(to_basic(value));
+}
+
+se_basic_map_t se_basic_map_new(void)
+{
+    return (se_basic_map_t)mapbasicbasic_new();
+}
+
+void se_basic_map_free(se_basic_map_t value)
+{
+    if (value != NULL) {
+        mapbasicbasic_free(to_basic_map(value));
+    }
+}
+
+void se_basic_map_insert(se_basic_map_t map, se_basic_t key, se_basic_t mapped)
+{
+    mapbasicbasic_insert(to_basic_map(map), to_basic(key), to_basic(mapped));
+}
+
+int32_t se_basic_subs_map(se_basic_t result, se_basic_t expr, se_basic_map_t substitutions)
+{
+    return (int32_t)basic_subs(to_basic(result), to_basic(expr), to_basic_map(substitutions));
+}
+
+int32_t se_basic_subs_pair(se_basic_t result, se_basic_t expr, se_basic_t lhs, se_basic_t rhs)
+{
+    return (int32_t)basic_subs2(to_basic(result), to_basic(expr), to_basic(lhs), to_basic(rhs));
+}
+
+se_basic_set_t se_basic_set_new(void)
+{
+    return (se_basic_set_t)setbasic_new();
+}
+
+void se_basic_set_free(se_basic_set_t value)
+{
+    if (value != NULL) {
+        setbasic_free(to_basic_set(value));
+    }
+}
+
+int32_t se_basic_free_symbols(se_basic_t expr, se_basic_set_t symbols)
+{
+    return (int32_t)basic_free_symbols(to_basic(expr), to_basic_set(symbols));
+}
+
+int32_t se_basic_set_size(se_basic_set_t value)
+{
+    return (int32_t)setbasic_size(to_basic_set(value));
+}
+
+int32_t se_basic_set_get(se_basic_set_t value, int32_t index, se_basic_t out_value)
+{
+    if (value == NULL || out_value == NULL || index < 0) {
+        return -1;
+    }
+
+    size_t size = setbasic_size(to_basic_set(value));
+    if ((size_t)index >= size) {
+        return -1;
+    }
+
+    setbasic_get(to_basic_set(value), index, to_basic(out_value));
+    return 0;
 }
