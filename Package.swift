@@ -60,7 +60,7 @@ let package = Package(
         .target(
             name: "CPPSymEngine",
             dependencies: [
-                .target(name: "CSymEngineBridge", condition: .when(platforms: [.macOS])),
+                .target(name: "CSymEngineBridge", condition: .when(platforms: [.macOS, .visionOS])),
             ]
         ),
         .testTarget(
